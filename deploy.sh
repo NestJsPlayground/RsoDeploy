@@ -34,13 +34,28 @@ kubectl "$ACTION" -f "$PROJECT_DIR/app-statefulset.yaml"
 kubectl "$ACTION" -f "$PROJECT_DIR/app-service.yaml"
 
 
-
+echo "Deploying auth..."
 PROJECT_DIR='/tmp/KUBERNETES_DEPLOY/auth'
 mkdir -p "$PROJECT_DIR"
 cp ./rso-auth/kubernetes/* "$PROJECT_DIR/"
 sed -i -e "s/%DEPLOY_VERSION%/$VERSION/g" "$PROJECT_DIR/app-statefulset.yaml"
+kubectl "$ACTION" -f "$PROJECT_DIR/app-statefulset.yaml"
+kubectl "$ACTION" -f "$PROJECT_DIR/app-service.yaml"
 
-echo "Deploying auth..."
+
+echo "Deploying store..."
+PROJECT_DIR='/tmp/KUBERNETES_DEPLOY/store'
+mkdir -p "$PROJECT_DIR"
+cp ./rso-store/kubernetes/* "$PROJECT_DIR/"
+sed -i -e "s/%DEPLOY_VERSION%/$VERSION/g" "$PROJECT_DIR/app-statefulset.yaml"
+kubectl "$ACTION" -f "$PROJECT_DIR/app-statefulset.yaml"
+kubectl "$ACTION" -f "$PROJECT_DIR/app-service.yaml"
+
+echo "Deploying exec..."
+PROJECT_DIR='/tmp/KUBERNETES_DEPLOY/exec'
+mkdir -p "$PROJECT_DIR"
+cp ./rso-exec/kubernetes/* "$PROJECT_DIR/"
+sed -i -e "s/%DEPLOY_VERSION%/$VERSION/g" "$PROJECT_DIR/app-statefulset.yaml"
 kubectl "$ACTION" -f "$PROJECT_DIR/app-statefulset.yaml"
 kubectl "$ACTION" -f "$PROJECT_DIR/app-service.yaml"
 
