@@ -14,15 +14,30 @@ services:
     ports:
       - 8500:8500
   app:
-    build: .
-    image: app
+    build: ./api-seed
+    image: rso-seed
     environment:
       - NODE_ENV=prod
       - MONGO_HOST=mongodb://mongo:47017/frirso
       - LOGZIO_TOKEN=${LOGZIO_TOKEN}
       - CONSUL_HOST=${CONSUL_HOST}
     ports:
-      - 80:3000
+      - 6001:3000
+    links:
+      - auth
     depends_on:
       - mongo
       - consul
+  auth:
+      build: ./rso-auth
+      image: rso-auth
+      environment:
+        - NODE_ENV=prod
+        - MONGO_HOST=mongodb://mongo:47017/frirso
+        - LOGZIO_TOKEN=${LOGZIO_TOKEN}
+        - CONSUL_HOST=${CONSUL_HOST}
+      ports:
+        - 6002:3000
+      depends_on:
+        - mongo
+        - consul
