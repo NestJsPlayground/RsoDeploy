@@ -59,3 +59,10 @@ sed -i -e "s/%DEPLOY_VERSION%/$VERSION/g" "$PROJECT_DIR/app-statefulset.yaml"
 kubectl "$ACTION" -f "$PROJECT_DIR/app-statefulset.yaml"
 kubectl "$ACTION" -f "$PROJECT_DIR/app-service.yaml"
 
+echo "Deploying web..."
+PROJECT_DIR='/tmp/KUBERNETES_DEPLOY/web'
+mkdir -p "$PROJECT_DIR"
+cp ./rso-web/kubernetes/* "$PROJECT_DIR/"
+sed -i -e "s/%DEPLOY_VERSION%/$VERSION/g" "$PROJECT_DIR/app-statefulset.yaml"
+kubectl "$ACTION" -f "$PROJECT_DIR/app-statefulset.yaml"
+kubectl "$ACTION" -f "$PROJECT_DIR/app-service.yaml"
