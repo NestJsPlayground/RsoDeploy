@@ -66,3 +66,11 @@ cp ./rso-web/kubernetes/* "$PROJECT_DIR/"
 sed -i -e "s/%DEPLOY_VERSION%/$VERSION/g" "$PROJECT_DIR/app-statefulset.yaml"
 kubectl "$ACTION" -f "$PROJECT_DIR/app-statefulset.yaml"
 kubectl "$ACTION" -f "$PROJECT_DIR/app-service.yaml"
+
+echo "Deploying order..."
+PROJECT_DIR='/tmp/KUBERNETES_DEPLOY/order'
+mkdir -p "$PROJECT_DIR"
+cp ./rso-order/kubernetes/* "$PROJECT_DIR/"
+sed -i -e "s/%DEPLOY_VERSION%/$VERSION/g" "$PROJECT_DIR/app-statefulset.yaml"
+kubectl "$ACTION" -f "$PROJECT_DIR/app-statefulset.yaml"
+kubectl "$ACTION" -f "$PROJECT_DIR/app-service.yaml"
