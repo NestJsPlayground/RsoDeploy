@@ -67,10 +67,10 @@ sed -i -e "s/%DEPLOY_VERSION%/$VERSION/g" "$PROJECT_DIR/app-statefulset.yaml"
 kubectl "$ACTION" -f "$PROJECT_DIR/app-statefulset.yaml"
 kubectl "$ACTION" -f "$PROJECT_DIR/app-service.yaml"
 
-echo "Deploying order..."
-PROJECT_DIR='/tmp/KUBERNETES_DEPLOY/order'
+echo "Deploying pdf..."
+PROJECT_DIR='/tmp/KUBERNETES_DEPLOY/pdf'
 mkdir -p "$PROJECT_DIR"
-cp ./rso-order/kubernetes/* "$PROJECT_DIR/"
+cp ./rso-pdf/kubernetes/* "$PROJECT_DIR/"
 sed -i -e "s/%DEPLOY_VERSION%/$VERSION/g" "$PROJECT_DIR/app-statefulset.yaml"
 kubectl "$ACTION" -f "$PROJECT_DIR/app-statefulset.yaml"
 kubectl "$ACTION" -f "$PROJECT_DIR/app-service.yaml"

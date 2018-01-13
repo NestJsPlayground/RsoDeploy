@@ -41,3 +41,29 @@ services:
       depends_on:
         - mongo
         - consul
+  store:
+      build: ./rso-store
+      image: rso-store
+      environment:
+        - NODE_ENV=prod
+        - MONGO_HOST=mongodb://mongo:47017/frirso
+        - LOGZIO_TOKEN=${LOGZIO_TOKEN}
+        - CONSUL_HOST=${CONSUL_HOST}
+      ports:
+        - 6003:3000
+      depends_on:
+        - mongo
+        - consul
+  store:
+      build: ./rso-store
+      image: rso-store
+      environment:
+        - NODE_ENV=prod
+        - MONGO_HOST=mongodb://mongo:47017/frirso
+        - LOGZIO_TOKEN=${LOGZIO_TOKEN}
+        - CONSUL_HOST=${CONSUL_HOST}
+      ports:
+        - 6003:3000
+      depends_on:
+        - mongo
+        - consul
